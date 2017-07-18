@@ -1,0 +1,73 @@
+Text Objects
+==============================================================================
+6. Text object selection			*object-select* *text-objects*
+
+This is a series of commands that can only be used while in Visual mode or
+after an operator.
+
+- The commands that start with "a" select "a"n object including white space
+- The commands starting with "i" select an "inner" object without white space, or just the white space.
+
+Also see `gn` and `gN`, operating on the last search pattern.
+
+Regular Objects~
+Object	object	Notes
+w	"a word"	
+W	"a WORD"	
+s	"a sentance"	Ends in '.','!','?' (including optional closing punctuation),
+					followed by <EOL>,<Space>, or <Tab> (See |sentence|)
+p	"a paragraph"	Text between line breaks or beginnings and ends of files
+					(See |paragraph|)
+
+Nesting Objects~
+Count decides which level of nesting to search for. a-prefix includes braces,
+i-prefix excludes
+
+]	"[['a'],'b']"	Moves back [count] '[' and selects to the matching square brace.
+[					Square braces without matches are not selected
+
+)	"(('a'),'b')"	Moves back [count] '(' and selects to the matching
+parentheses.
+(					Parentheses without matches are not selected
+
+>	"<<'a'>,'b'>"	Moves back [count] '<' and selects to the matching angle brace.
+<					Angle braces without matches are not selected.
+					See "a tag" block for better HTML,XML support
+
+t	"<p>text</p>"	Additional rules: non-nesting and self closing HTML tags are ignored,
+					case is ignored (even for XML), missing end tags are ignored. See also: |tag-blocks| about the details.
+
+}			"a Block", select [count] Blocks, from "[count] [{" to
+{			the matching '}', including the '{' and '}' (see
+B			|[{|).
+
+String Objects~
+a"	"a quoted string"	Selects from previous qoute from until next.
+						The 'quoteescape' option is used to skip escaped quotes.
+a'						It only works within one line, [count] is not currently used.
+a`
+
+Note the difference between movement command and objects:
+The movement command operates from the cursor position to where the movement
+takes us, objects are selected no matter where inside of them a cursor is.
+
+Tag blocks						*tag-blocks*
+
+For the "it" and "at" text objects an attempt is done to select blocks between
+matching tags for HTML and XML.  But since these are not completely compatible
+there are a few restrictions.
+
+The normal method is to select a <tag> until the matching </tag>.  For "at"
+the tags are included, for "it" they are excluded.  But when "it" is repeated
+the tags will be included (otherwise nothing would change).  Also, "it" used
+on a tag block with no contents will select the leading tag.
+
+"<aaa/>" items are skipped.  Case is ignored, also for XML where case does
+matter.
+
+In HTML it is possible to have a tag like <br> or <meta ...> without a
+matching end tag.  These are ignored.
+
+The text objects are tolerant about mistakes.  Stray end tags are ignored.
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,6 @@
+*vim-quickhelp.txt*	For Vim version 8.0	Last change: 2017 July 18
+
+Vim QuickHelp
+========================================================
+Contents
+vim:tw=78:ts=8:ft=help:norl:

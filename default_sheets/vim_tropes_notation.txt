@@ -1,0 +1,2 @@
+See intro.txt's notation section
+See https://github.com/mhinz/vim-galore#cheatsheets

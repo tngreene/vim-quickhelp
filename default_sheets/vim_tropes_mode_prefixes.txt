@@ -1,0 +1,30 @@
+Vim Tropes - Mode Prefixes
+
+(from *map-listing*)
+
+      CHAR	MODE	~
+     <Space>	Normal, Visual, Select and Operator-pending
+	n	Normal
+	v	Visual and Select
+	s	Select
+	x	Visual
+	o	Operator-pending
+	!	Insert and Command-line
+	i	Insert
+	l	":lmap" mappings for Insert, Command-line and Lang-Arg
+	c	Command-line
+
+Just before the {rhs} a special character can appear:
+	*	indicates that it is not remappable
+	&	indicates that only script-local mappings are remappable
+	@	indicates a buffer-local mapping
+
+Everything from the first non-blank after {lhs} up to the end of the line
+(or '|') is considered to be part of {rhs}.  This allows the {rhs} to end
+with a space.
+
+Note: When using mappings for Visual mode, you can use the "'<" mark, which
+is the start of the last selected Visual area in the current buffer |'<|.
+
+The |:filter| command can be used to select what mappings to list.  The
+pattern is matched against the {lhs} and {rhs} in the raw form.

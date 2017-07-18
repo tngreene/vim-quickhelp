@@ -1,0 +1,22 @@
+The Expression Register
+=======================
+
+
+
+The expression must evaluate to a string. Numbers are automatically converted.
+For a p or ":put" command, floats are converted into a string. If the result
+is a list, each is converted into a string and used as a line, split on <NL>
+characters. If it ends in a <NL> it is regared as a line wise register.
+
+Expression
+----------
+Start Type | Result | When? |
+-----------------------------
+String     | String | Always
+Number     | String | Always
+Float      | String | In p or :put, otherwise error
+List       | String | p or :put, split at <NL>. It ending in <NL>, itFloat      | String | In  
+
+In use
+
+vim:tw=78:ts=8:ft=help:norl:

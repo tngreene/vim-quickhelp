@@ -1,0 +1,28 @@
+*ranges.txt*	For Vim version 8.0. Last change: 2017 June 28
+
+                                      Ranges
+==============================================================================
+Many : commands can be applied to a s a selection of lines.
+This is called a range. Ranges xxxx[range]
+
+Line numbers may be specified with:		*:range* *E14* *{address}*
+	{number}	an absolute line number
+	.		the current line			  *:.*
+	$		the last line in the file		  *:$*
+	%		equal to 1,$ (the entire file)		  *:%*
+	't		position of mark t (lowercase)		  *:'*
+	'T		position of mark T (uppercase); when the mark is in
+			another file it cannot be used in a range
+	/{pattern}/	the next line where {pattern} matches	  *:/*
+	?{pattern}?	the previous line where {pattern} matches *:?*
+	\/		the next line where the previously used search
+			pattern matches
+	\?		the previous line where the previously used search
+			pattern matches
+	\&		the next line where the previously used substitute
+			pattern matches
+
+Each specifier can be followed by '+' or '-' and an optional number, it will
+change the preceding line number. If ommited, 1 is used. 
+
+vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,88 @@
+Regex
+=============================
+==============================================================================
+3. Examples:
+
+Patern after \v,\m,\M,\V switches parsing mode
+
+after:	  \v	   \m	    \M	     \V		matches ~
+		'magic' 'nomagic'
+	  $	   $	    $	     \$		matches end-of-line
+	  .	   .	    \.	     \.		matches any character
+	  *	   *	    \*	     \*		any number of the previous
+atom
+	  ~	   ~	    \~	     \~		latest substitute string
+	  ()	   \(\)     \(\)     \(\)	grouping into an atom
+	  |	   \|	    \|	     \|		separating alternatives
+	  \a	   \a	    \a	     \a		alphabetic character
+	  \\	   \\	    \\	     \\		literal backslash
+	  \.	   \.	    .	     .		literal dot
+	  \{	   {	    {	     {		literal '{'
+	  a	   a	    a	     a		literal 'a'
+
+
+Character classes {not in Vi}:				*/character-classes*
+      magic   nomagic	matches ~
+|/\d|	\d	\d	digit:				[0-9]
+|/\a|	\a	\a	alphabetic character:		[A-Za-z]
+|/\l|	\l	\l	lowercase character:		[a-z]
+|/\u|	\u	\u	uppercase character:		[A-Z]
+|/\s|	\s	\s	whitespace character: <Space> and <Tab>
+|/\w|	\w	\w	word character:			[0-9A-Za-z_]
+|/\p|	\p	\p	printable character (see 'isprint' option)
+|/\P|	\P	\P	like "\p", but excluding digits
+
+Upper case versions generally mean "non-character x" (for example /\D means
+non-digit, \S means non-whitespace, \L means non-lowercase). Simple inverses
+are ommited
+
+|/\f|	\f	\f	file name character (see 'isfname' option)
+|/\F|	\F	\F	like "\f", but excluding digits
+|/\x|	\x	\x	hex digit:			[0-9A-Fa-f]
+|/\X|	\X	\X	non-hex digit:			[^0-9A-Fa-f]
+|/\o|	\o	\o	octal digit:			[0-7]
+|/\O|	\O	\O	non-octal digit:		[^0-7]
+|/\h|	\h	\h	head of word character:		[A-Za-z_]
+|/\H|	\H	\H	non-head of word character:	[^A-Za-z_]
+|/\_|	\_x	\_x	where x is any of the characters above: character
+			class with end-of-line included
+
+      magic   matches ~
+|/\e|	\e  	<Esc>
+|/\t|	\t  	<Tab>
+|/\r|	\r  	<CR>
+|/\b|	\b  	<BS>
+|/\n|	\n  	end-of-line
+|/~|	~   	last given substitute string
+|/\1|	\1  	same string as matched by first \(\) {not in Vi}
+|/\2|	\2  	Like "\1", but uses second \(\)
+	 ...
+|/\9|	\9  	Like "\1", but uses ninth \(\)
+
+	x   	a character with no special meaning matches itself
+
+|/[]|	[]  	any character specified inside the []
+|/\%[]|	\%[]	a sequence of optionally matched atoms
+
+|/\c|	\c  	ignore case, do not use the 'ignorecase' option
+|/\C|	\C  	match case, do not use the 'ignorecase' option
+|/\Z|	\Z  	ignore differences in Unicode "combining characters".
+
+\{n,m}	Matches n to m of the preceding atom, as many as possible
+\{-n,m}	matches n to m of the preceding atom, as few as possible
+
+\{n}	Matches n of the preceding atom
+\{-n}	matches n of the preceding atom
+
+\{n,}	Matches at least n of the preceding atom, as many as possible
+\{-n,}	matches at least n of the preceding atom, as few as possible
+
+\{-,m}	matches 0 to m of the preceding atom, as few as possible
+\{,m}	Matches 0 to m of the preceding atom, as many as possible
+
+\{}	Matches 0 or more of the preceding atom, as many as possible (like *)
+\{-}	matches 0 or more of the preceding atom, as few as possible
+
+The } may optionally be preceded with a backslash: \{n,m\}.
+
+vim:tw=78:ts=8:ft=help:norl:

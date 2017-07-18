@@ -1,0 +1,4 @@
+Hard to Find Help Documents
+==============================================================================
+
+Help on help documents - helphelp.txt
