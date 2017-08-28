@@ -1,1 +1,40 @@
 http://vim.wikia.com/wiki/Using_marks
+
+|'| jumps to the first non-blank character of the line of that mark
+|`| jumps to the exact line and column of that mark
+
+:mark		List all marks (except |'(|, |')|, |'{| and |'}|)
+:mark {marks}	List specific markers (concatinated, seperated by spaces,
+		or given in ranges [a-z])
+
+:delm[arks] {marks}	Delete specified marks (A-Z,a-z,0-9)
+:delm[arks]!		Delete all marks in current buffer (except A-Z or 0-9)
+
+Read/Write Marks
+~~~~~~~~~~~~~~~~~
+Name	Where	To set	Notes
+
+'a-'z 	Local to buffer	m{a-z}	Note:Lost if file is removed from
+				buffer list or line deleted
+
+'A-'Z	Unique across buffers	m{A-Z}	Note:Can only use with operator if in
+					buffer containing mark
+
+' or `	Set a mark, or set with m'
+
+[ or ]	Set the mark for '[ '] see [ v do the following
+
+< or >	Visual Selection Start and End	Make visual selection or m< or m>  >
+
+Read-Only Marks
+~~~~~~~~~~~~~~~
+Name	Where
+'0-'9	(line,col) of last used files
+'[ ']	To first or last, respectively, of previously changed or yanked text
+^Is this working?
+
+Redundent Marks
+'( '{
+abcdat (row,colum) local
+ vim:tw=78:ts=8:ft=help:norl:
+

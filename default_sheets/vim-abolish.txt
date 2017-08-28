@@ -1,0 +1,11 @@
+Changing case
+Example change_this
+Coerce my_example to...	Keystrokes	Result
+MixedCase	crm	MyExample
+Title Case	crt	My Example
+UPPER_CASE	cru	MY_EXAMPLE
+camelCase	crc	myExample
+dash-case	cr-	my-example
+dot.case	cr.	my.example
+snake_case	crs	my_example
+space case cr<space>	my example

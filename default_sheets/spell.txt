@@ -1,0 +1,112 @@
+spell.txt
+
+*spell.txt*	For Vim version 8.0.  Last change: 2016 Jan 08
+
+===============================================================================
+
+1. Quick start					*spell-quickstart* *E756*
+
+This switches on the 'spell' option. spelllang is optional.
+
+	:setlocal spell
+
+Spell checking wraps around file when 'wrapscan' is on.
+
+Searching for misspelled words
+
+Spellrotate (normal, visual)
+zn	spell rotate forward
+zp	spell rotate backward
+
+Command		Action						Finds
+[count]]s	Move to [count] next misspelled word after the cursor	Bad, rare words
+[count]]S	Move to next misspelled word after the cursor	Bad words
+
+[count][s	Move to next misspelled word before the cursor	Bad, rare words
+[count][S	Move to next misspelled word before the cursor	Bad words
+
+							*[s*
+[count][s		Like "]s" but search backwards, find the misspelled
+			word before the cursor.  Doesn't recognize words
+			split over two lines. Does not stop at word with
+			missing capital at the start of a line.
+
+Add words as good 
+-----------------
+Command	spellfile
+zg	'spellfile'
+zG	|internal-wordlist|
+
+Add words as bad
+------------------
+Command	spellfile
+zw	'spellfile'
+zW	|internal-wordlist|
+
+Undo addition/remove added words
+Command	spellfile
+zug/w	'spellfile'
+zuG/W	||internal-wordlist|
+
+[count] with zg,zug/zuw/zuG/zuW	A count may precede the command
+				to indicate the entry in 'spellfile' to be used.  A
+				count of two uses the second entry.
+
+Visual mode
+			In Visual mode the selected characters are added as a
+			word (including white space!).
+			When the cursor is on text that is marked as badly
+			spelled then the marked text is used.
+			Otherwise the word under the cursor, separated by
+			non-word characters, is used.
+
+Conflicts
+			If the word is explicitly marked as bad word in
+			another spell file the result is unpredictable.
+
+zw			Like "zg" but mark the word as a wrong (bad) word.
+			If the vord already appears in 'spellfile' it is
+			turned into a comment line.  See |spellfile-cleanup|
+			for getting rid of those.
+
+Suggestions
+							*z=*
+z=			For the word under/after the cursor suggest correctly
+			spelled words.  This also works to find alternatives
+			for a word that is not highlighted as a bad word,
+			e.g., when the word after it is bad.
+			In Visual mode the highlighted text is taken as the
+			word to be replaced.
+			The results are sorted on similarity to the word being
+			replaced.
+			This may take a long time.  Hit CTRL-C when you get
+			bored.
+
+			If the command is used without a count the
+			alternatives are listed and you can enter the number
+			of your choice or press <Enter> if you don't want to
+			replace.  You can also use the mouse to click on your
+			choice (only works if the mouse can be used in Normal
+			mode and when there are no line wraps).  Click on the
+			first line (the header) to cancel.
+
+			The suggestions listed normally replace a highlighted
+			bad word.  Sometimes they include other text, in that
+			case the replaced text is also listed after a "<".
+
+			If a count is used that suggestion is used, without
+			prompting.  For example, "1z=" always takes the first
+			suggestion.
+
+			"." will repeat word replacement. This works like "ciw",
+			 the good word and <Esc>.
+
+After adding a word to 'spellfile' with the above commands its associated
+".spl" file will automatically be updated and reloaded.
+
+							*internal-wordlist*
+The internal word list is used for all buffers where 'spell' is set.  It is
+not stored, it is lost when you exit Vim.  It is also cleared when 'encoding'
+is set.
+
+ vim:tw=78:sw=4:ts=8:ft=help:norl:

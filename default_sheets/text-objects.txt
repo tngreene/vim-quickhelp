@@ -28,14 +28,14 @@ i-prefix excludes
 
 )	"(('a'),'b')"	Moves back [count] '(' and selects to the matching
 parentheses.
-(					Parentheses without matches are not selected
+(			Parentheses without matches are not selected
 
 >	"<<'a'>,'b'>"	Moves back [count] '<' and selects to the matching angle brace.
-<					Angle braces without matches are not selected.
-					See "a tag" block for better HTML,XML support
+<			Angle braces without matches are not selected.
+			See "a tag" block for better HTML,XML support
 
 t	"<p>text</p>"	Additional rules: non-nesting and self closing HTML tags are ignored,
-					case is ignored (even for XML), missing end tags are ignored. See also: |tag-blocks| about the details.
+			case is ignored (even for XML), missing end tags are ignored. See also: |tag-blocks| about the details.
 
 }			"a Block", select [count] Blocks, from "[count] [{" to
 {			the matching '}', including the '{' and '}' (see
@@ -43,8 +43,8 @@ B			|[{|).
 
 String Objects~
 a"	"a quoted string"	Selects from previous qoute from until next.
-						The 'quoteescape' option is used to skip escaped quotes.
-a'						It only works within one line, [count] is not currently used.
+				The 'quoteescape' option is used to skip escaped quotes.
+a'				It only works within one line, [count] is not currently used.
 a`
 
 Note the difference between movement command and objects:
