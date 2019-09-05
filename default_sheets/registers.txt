@@ -1,42 +1,79 @@
 Vim Registers
 ==============================================================================
 
-													*:reg* *:registers*
+								*:reg* *:registers*
 :"reg[isters] {arg} Displays contents of all numbered and named registers.
 With optional {arg}, only those registers are displayed. Example :reg a
 displays the contents of "a, :reg 0123b displays contents of "1,"2,"3, and "b
 
 There are ten types of registers:			*registers* *E354*
-1. The unnamed register ""
-2. 10 numbered registers "0 to "9
-3. The small delete register "-
-4. 26 named registers "a to "z or "A to "Z
-5. three read-only registers ":, "., "%
-6. alternate buffer register "#
-7. the expression register "=
-8. The selection and drop registers "*, "+ and "~ 
-9. The black hole register "_
-10. Last search pattern register "/
+1. The unnamed register ""				*quote_quote* *quotequote*      
+Filled with text deleted with "d", "c", "s", "x" or yanked with "y", regardless
+of any other register specified (except the black hole register "_).
+p or P uses "" by default.
 
-3. Small delete register "-
-	"- Contains text from commands that delete less than one line of text/ 
-4. Read Only registers |:.| , |"%| , |":|
+2. Numbered registers "0 to "9		*quote_number* *quote0* *quote1*
+					*quote2* *quote3* *quote4* *quote9*
+"0 contains text from most recent yank
+"1 from most recent delete or change, unless another register is specified
+or delete is less than one line. It is, however, always filled when deleted
+with the following movement commands |%|, |(|, |)|, |`|,
+|/|, |?|, |n|, |N|, |{| and |}|. 
 
-	".	Contains last inserted text. Use CTRL-A and CTRL-Q (CTRL-A<ESC>) in
-insert mode.
+"2-"9, each time "1 is changed, the contents of "1 get pushed to "2, "2 to "3,
+etc until the contents of "9 are lost
+
+3. Small delete register "-				*quote_-* *quote-*
+This register is filled whenever a delete command deletes less than one line
+(a small change), except when another register is explicitly specified
+
+4. Named registers "a to "z or "A to "Z			*quote_alpha* *quotea*
+These are only filled as is told. Lowercase replaces, uppercase appends
+
+5. Read-only registers ":, ". and "%
+
+							*quote_.* *quote.* *E29*
+	".	Contains last inserted text using insert commands
+							*quote_%* *quote%*
 	"%	Contains the name of the current file. Use %:p for full
 		path, as in `expand("%:p")`
 
-	":	Contains most recent executed non-plugin command-line cmd.
+							*quote_:* *quote:* *E30*
+	":	Contains most recent executed non-plugin command-line cmd
 
-8. Selection and rop registers
-	"* and "+	Contains text stored and retrieved from the gui_clipboard. See
-|x11-selection| on X11 systems 
-	"~	Contains last dragged and dropped text.
+							*quote_#* *quote#*
+6. Alternate file register "#
+The name of the alternate file for the current window,
+changing what |CTRL-^| opens
 
-9. Black hole register
-	"_ The only "write only" register - can be used to throw away results
-without affecting other registers. Reading from it results in nothing.
+7. Expression register "=			*quote_=* *quote=* *@=*
+Gets the output of an expression, as entered in the commandline,
+and uses it as the value of the register. Immediately after invoking
+the register (with " or *CTRL-R*) the cursor jumps to the commandline
+to input it.
+
+Result Type | Converted To String ~
+------------|-------------------- ~
+String      | Yes ~
+Number      | Yes ~
+Float       | Yes ~
+List        | Each element is converted as possible, appended with <NL> ~
+Dictionary  | No, must use string() first ~
+FuncRef     | No, must use string() first ~
+
+8. Selection and drop registers "*, "+ and "~ 
+"* and "+ contain clipboard text. On X11 systems these may be different
+
+						*quote_~* *quote~* *<Drop>*
+"~ stores the last dropped text from a drag and drop operation
+
+9. Black hole register "_				*quote_*
+Anything written to this register is lost and no side effects occur.
+Any attempts to read this register results in an empty string
+
+10. Last search pattern register	"/			*quote_/* *quote/*
+Contains the most recent search-pattern.  This is used for "n" and 'hlsearch'.
+Changing `:let` does not search again. It cannot be changed with yank or delete
 
 
 vim:tw=78:ts=8:ft=help:norl:
